@@ -1,0 +1,29 @@
+{# On indique de quel template on hérite.
+   Le chemin est à indiquer depuis le répertoire racine des templates (templates/) #}
+{% extends "base.html.twig" %}
+
+{# On déclare les blocs dont on souhaite écraser le contenu.
+   Les autres blocs garderont le contenu indiqué dans le template parent #}
+{% block body %}
+    <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Liste des artistes</a></li>
+        <li><a href="#">Connexion</a></li>
+    </ul>
+
+    {# Affichage d'une variable #}
+    {{ foo }}
+
+    {% if booleen %}
+        <br>Le booléen est true
+    {% else %}
+        <br>Le booléen est false
+    {% endif %}
+
+    {# Equivalent à: foreach($produits as $element) #}
+    {% for element in produits %}
+        <br>{{ element }}
+    {% endfor %}
+    
+{% endblock %}
+
