@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,38 +17,46 @@ class HomeController extends AbstractController
      * page liste d'artistes
      * @Route("/list", name="list")
      */
-    public function list(Request $request)
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/HomeController.php',
-            'get' => $request->query->get('test', 'défaut'), //si n y a rien il nous renvoie 'defaut'
-            // 'get2' => $_GET['test'] ?? 'defaut',    // ==> ?? on remplace les else
-        ]);
-    }
+    // public function list(Request $request)
+    // {
+    //     return $this->json([
+    //         'message' => 'Welcome to your new controller!',
+    //         'path' => 'src/Controller/HomeController.php',
+    //         'get' => $request->query->get('test', 'défaut'), //si n y a rien il nous renvoie 'defaut'
+    //         // 'get2' => $_GET['test'] ?? 'defaut',    // ==> ?? on remplace les else
+    //     ]);
+    // }
      /**
      * page connexion
      * @Route("/connexion", name="connexion")
      */
-    public function connexion(Request $request, Session $session)
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/HomeController.php',
-            'get' => $request->query->get('test', 'défaut'), //si n y a rien il nous renvoie 'defaut'
-            // 'get2' => $_GET['test'] ?? 'defaut',    // ==> ?? on remplace les else
-            'session' => get_class($session), 
-            'session' => $session->has('cle_inexistante'),
-        ]);
-    }
+    // public function connexion(Request $request, Session $session)
+    // {
+    //     return $this->json([
+    //         'message' => 'Welcome to your new controller!',
+    //         'path' => 'src/Controller/HomeController.php',
+    //         'get' => $request->query->get('test', 'défaut'), //si n y a rien il nous renvoie 'defaut'
+    //         // 'get2' => $_GET['test'] ?? 'defaut',    // ==> ?? on remplace les else
+    //         'session' => get_class($session), 
+    //         'session' => $session->has('cle_inexistante'),
+    //     ]);
+    // }
 
     /**
      * page d'accueil
      * @Route("/", name="homepage")
      */
 
-    public function home()
+    public function home(ProduitRepository $repository)
     {
+        // Action                                       méthode         si résultats    si aucun résultat
+        // Récupérer toutes les entités                 findAll()       array           array (vide)
+        // Récupérer des entités selon des critères     findBy()        array           array (vide)
+        // Récupérer 1 entité selon des critères        findOneBy()     object          null
+        // Récupérer 1 entité selon son ID              find()          object          null
+        $resultat = $repository->findAll();
+        dd($resultat);
+
         //Afficher le template Twig home.html.twig
         return $this->render('home.html.twig', [
             'foo' => 'bar',

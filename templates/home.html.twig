@@ -7,25 +7,11 @@
    Les autres blocs garderont le contenu indiqué dans le template parent #}
 
 {% block body %}
-    {# <ul>
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Liste des artistes</a></li> 
-        <li><a href="#">Connexion</a></li>
-    </ul> #}
-
-    {# Affichage d'une variable #}
-    {{ foo }}
-
-    {% if booleen %}
-        <br>Le booléen est true
-    {% else %}
-        <br>Le booléen est false
-    {% endif %}
-
-    {# Equivalent à: foreach($produits as $element) #}
-    {% for element in produits %}
-        <br>{{ element }}
-    {% endfor %}
+  
+    <h1>Accueil</h1>
+    <p>
+        Nombre de produits {{ produit|length}}
+    </p>
     
 {% endblock %}
 
