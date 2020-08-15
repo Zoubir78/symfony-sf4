@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Form\ProduitFormType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -59,5 +60,46 @@ class ProduitController extends AbstractController
         return $this->render('produit/ajout.html.twig', [
             'produit_form' => $form->createView()
         ]);
+    }
+
+    /**
+     * Modification d'un produit
+     * @Route("/{id}", name="modif")
+     * le composant ParamConverter va convertir le paramètre id en l'entité associée
+     */
+    public function modification(Produit $produit, Request $request, EntityManagerInterface $entityManager)
+    {
+        // On passe l'entité à modifier en 2ème argument (arg. "data")
+        // Pour que l'objet soit directement modifier et pour pré-remplir le formulaire
+        $form = $this->createForm(ProduitFormType::class, $produit);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            // Il n'est pas nécessaire de récupèrer les données du formulaire: l'entité a été modifiée par celui-ci
+            // On appelle pas non plus $entityManager->persist() car Doctrine connait déjà l'existance de l'entité 
+            $entityManager->flush();
+            $this->addFlash('success', 'Le produit a été mis à jour.');
+            return $this->redirectToRoute('produit_list');
+        }
+
+        return $this->render('produit/modif.html.twig', [
+            'produit' => $produit,
+            'produit_form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Suppression d'un produit
+     * @Route("/{id}/supprimer", name="supprimer")
+     */
+    public function supprimer(Produit $produit, EntityManagerInterface $entityManager)
+    {
+        // Suppression
+        $entityManager->remove($produit);
+        $entityManager->flush();
+
+        // Message & redirection
+        $this->addFlash('info', 'Le produit a été supprimé.');
+        return $this->redirectToRoute('produit_list');
     }
 }
