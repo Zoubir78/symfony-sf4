@@ -1,0 +1,24 @@
+{# 
+    la variable "app" est présente dans tous les templates Twig.
+    Elle permet d'accéder à diverses données.
+    On peut récupérer les messages flash (définis dans les controlleurs) par app.flashes()
+    Exemple du tableau retourné:
+    
+        [
+            'success' => [
+                'Message de succès',
+                'Autre message'
+            ],
+            'danger' => [
+                'Erreur ...'
+            ]
+        ]
+#}
+
+{# Equivalent PHP: foreach(flashes() as $type => $liste_messages) #}
+
+{% for type, liste_messages in app.flashes() %}
+    {% for message in liste_messages %}
+        <div class="alert alert-{{ type }}">{{ message }}</div>
+    {% endfor %}  
+{% endfor %}      

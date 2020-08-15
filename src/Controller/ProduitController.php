@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Form\ProduitFormType;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -26,12 +29,35 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * page d'ajour de produits
-    //  * @Rroute("/ajout", name="ajout")
-    //  */
-    // public function ajout()
-    // {
-    //     return $this->render('produit/ajout.html.twig');
-    // }
+    /**
+     * page d'ajour de produits
+     * @Route("/ajout", name="ajout")
+     */
+    public function ajout(Request $request, EntityManagerInterface $entityManager)
+    {
+        // 1) Création du formulaire
+        $form = $this->createForm(ProduitFormType::class);
+
+        // 2) Passer la requête HTTP au formulaire (recupèrer les données envoyées)
+        $form->handleRequest($request);
+
+        // 3) Vérifier que le formulaire ait été envoyé et est valide
+        if($form->isSubmitted() && $form->isValid()){
+
+            // 4) Récupèrer les données du formulaire
+            $produit = $form->getData();
+            // dd($produit);
+
+            $entityManager->persist($produit);
+            $entityManager->flush();
+
+            //Message flash & redirection
+            $this->addFlash('success', 'Le produit a été enregistré !');
+            return $this->redirectToRoute('produit_list');
+        }
+        // 5) Pour afficher le formulaire, passer le résultat au formulaire
+        return $this->render('produit/ajout.html.twig', [
+            'produit_form' => $form->createView()
+        ]);
+    }
 }
