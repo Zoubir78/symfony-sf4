@@ -12,14 +12,32 @@
 </head>
 <body>
     {# Ceci est un commentaire #}
-    <ul class="nav">
+    <ul class="nav badge-dark">
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>  <!--  c'est comme on a utilisé "/"  -->
+            <a class="nav-link badge-dark" href="{{ path('homepage') }}">Accueil</a>  <!--  c'est comme on a utilisé "/"  -->
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('produit_list') }}">Produits</a>  
+            <a class="nav-link badge-dark" href="{{ path('produit_list') }}">Produits</a>  
         </li>
+        <li class="nav-item">
+            <a class="nav-link badge-dark" href="{{ path('security_registration') }}">Inscription</a>  
+        </li>
+         <li class="nav-item">
+            <a class="nav-link badge-dark" href="{{ path('security_contact') }}">Contact</a>  
+        </li>
+
+        {% if not app.user %}
+            <li class="nav-item">
+                <a class="nav-link badge-dark" href="{{ path('security_login') }}">Connexion</a>  
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link badge-dark" href="{{ path('security_logout') }}">Déconnexion</a>  
+            </li>
+        {% endif %}
     </ul>
+
+    {# <nav class="navbar navbar-dark navbar-bg {{ app.session.flashbag.peek('success')|length }}"> #}
 
     <div class="container mt-4 p-4" >
         {% block body %}{% endblock %}

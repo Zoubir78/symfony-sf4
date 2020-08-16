@@ -55,7 +55,7 @@ class HomeController extends AbstractController
         // Récupérer 1 entité selon des critères        findOneBy()     object          null
         // Récupérer 1 entité selon son ID              find()          object          null
         $resultat = $repository->findAll();
-        dd($resultat);
+        // dd($resultat);
 
         //Afficher le template Twig home.html.twig
         return $this->render('home.html.twig', [
@@ -93,13 +93,13 @@ class HomeController extends AbstractController
 
         $produit->setDescription('');
         $em->flush();         
-        dump($produit); 
+        // dump($produit); 
 
         //Suppression
 
         $em->remove($produit);  // On prépare à la suppression
         $em->flush();         
-        dd($produit);
+        // dd($produit);
     }
 
     // /**
