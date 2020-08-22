@@ -1,25 +1,27 @@
 {# On indique de quel template on hérite.
    Le chemin est à indiquer depuis le répertoire racine des templates (templates/) #}
 
-{% extends "base.html.twig" %}
+{% extends "_template.html.twig" %}
 
 {# On déclare les blocs dont on souhaite écraser le contenu.
    Les autres blocs garderont le contenu indiqué dans le template parent #}
 
-{% block body %}
-  
-    <h1>Bienvenue sur mon site de <span class="badge badge-secondary">Gestion de stock</span></h1>
-    {# <p>
-        Nombre de produits {{ produit|length }}
-    </p> #}
-    <p>
-    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.<br>
-    Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme<br>
-    de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, <br>
-    mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié.<br>
-    Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du<br>
-    par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-    </p>
+{% block content %}
+
+    <div class="section">
+        <h1 class="title">Bienvenue sur mon site de Gestion de stock</h1>
+        {# <p>
+            Nombre de produits {{ produit|length }}
+        </p> #}
+        <p>
+        Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.<br>
+        Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme<br>
+        de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, <br>
+        mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié.<br>
+        Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du<br>
+        par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
+        </p>
+    </div>
     
 {% endblock %}
 

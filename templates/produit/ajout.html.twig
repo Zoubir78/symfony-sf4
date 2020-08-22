@@ -1,11 +1,14 @@
-{% extends "base.html.twig" %}
+{% extends "_template.html.twig" %}
 
 {% block title %}Nouveau produit{% endblock %}
 
-{% block body %}
+{% block content %}
+    <div class="section">
   
-    <h1>Nouveau produit</h1>
-    
-     {% include 'produit/_produit_form.html.twig' %}
+        <h1 class="title">Nouveau produit</h1>
+        
+        {% include 'produit/_produit_form.html.twig' %}
+
+    </div>
 
 {% endblock %}

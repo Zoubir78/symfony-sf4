@@ -1,21 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends "_template.html.twig" %}
 
 {% block title %}Connexion{% endblock %}
 
-{% block body %}
+{% block content %}
+  
+    <div class="section">
 
-{% include 'includes/flash.html.twig' %}
-    <h1>Connexion</h1>
+        <h1 class="title">Connexion</h1>
+        
+        <form action="{{ path('security_login')}}" method="post">
+            <div class="form-group field">
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input form-control" placeholder="Email ..." required name="_username" type="text">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="form-group field">
+                <p class="control has-icons-left">
+                    <input class="input form-control" placeholder="Mot de passe" required name="_password" type="password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
 
-    <form action="{{ path('security_login')}}" method="post">
-        <div class="form-group">
-            <input placeholder="Adresse email ..." required name="_username" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <input placeholder="Mot de passe" required name="_password" type="password" class="form-control">
-        </div>
-
-        <button type="submit" class="btn btn-success">Connexion</button>
-    </form>
+            <button type="submit" class="btn btn-success">Connexion</button>
+        </form>
+    </div>
 
 {% endblock %}

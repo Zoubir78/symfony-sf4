@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +39,7 @@ class SecurityController extends AbstractController
 
             $this->addFlash('success', 'Vous venez de vous inscrire sur notre site !');
             return $this->redirectToRoute('security_login');
-           
+            
         }
 
         return $this->render('security/registration.html.twig', [
@@ -54,8 +53,8 @@ class SecurityController extends AbstractController
 
     public function login()
     {
+        // $this->addFlash('success', 'Vous êtes bien connecté !');
         return $this->render('security/login.html.twig');
-        $this->addFlash('success', 'Vous êtes bien connecté !');
     }
 
     /**
@@ -64,7 +63,7 @@ class SecurityController extends AbstractController
 
     public function logout()
     {
+        $this->addFlash('success', 'Vous êtes bien déconnecté !');
         return $this->render('security/login.html.twig');
-        $this->addFlash('success', 'Vous êtes bien connecté !');
     }
 }

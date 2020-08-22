@@ -1,15 +1,18 @@
-{% extends "base.html.twig" %}
+{% extends "_template.html.twig" %}
 
 {% block title %}
     Produit {{ produit.nom }}
 {% endblock %}
 
-{% block body %}
-  
-    <h1>Produit {{ produit.nom }}</h1>
+{% block content %}
+    <div class="section">
 
-    {% include 'includes/flash.html.twig' %}
-    
-    {% include 'produit/_produit_form.html.twig' %}
+        <h1 class="title">Produit {{ produit.nom }}</h1>
+
+        {% include 'includes/flash.html.twig' %}
+        
+        {% include 'produit/_produit_form.html.twig' %}
+
+    </div>
 
 {% endblock %}
