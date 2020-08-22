@@ -22,12 +22,15 @@
             </div>
             <div class="form-group field">
                 <p class="control has-icons-left">
-                    <input class="input form-control" placeholder="Mot de passe" required name="_password" type="password">
+                    <input class="input form-control" placeholder="Mot de passe" required autofocus name="_password" type="password">
                     <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                     </span>
                 </p>
             </div>
+
+            {# un champ caché pour la protection des failles CSRF #}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
             <button type="submit" class="btn btn-success">Connexion</button>
         </form>
